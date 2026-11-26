@@ -1,0 +1,26 @@
+{
+  "id": "broken",
+  "title": "Broken fixture",
+  "intro": "Deliberately invalid puzzle used by tests/simulation/validation.test.ts.",
+  "maxTicks": 0,
+  "map": ["....", "..."],
+  "nodes": [
+    { "id": "a", "x": 0, "y": 0 },
+    { "id": "a", "x": 1, "y": 0 },
+    { "id": "c", "x": 1, "y": 0 }
+  ],
+  "edges": [
+    { "chain": ["a", "ghost"], "modes": ["foot", "hover"] },
+    { "chain": ["a", "c"], "modes": ["car"], "signal": "no_such_light" }
+  ],
+  "landmarks": [{ "id": "lm", "node": "nowhere", "label": "nowhere" }],
+  "actors": [
+    { "id": "p", "kind": "pedestrian", "label": "P", "start": "a", "destination": "a" },
+    { "id": "q", "kind": "dragon", "label": "Q", "start": "a", "destination": "c" }
+  ],
+  "protagonist": "nobody",
+  "objects": [
+    { "id": "light", "kind": "traffic_light", "label": "Light", "tile": { "x": 0, "y": 0 },
+      "cycle": { "period": 4, "greenTicks": 9, "offset": 0 }, "modifications": [] }
+  ]
+}

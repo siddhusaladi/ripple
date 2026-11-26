@@ -1,5 +1,8 @@
 import type { PuzzleDefinition } from "../simulation/types";
+import { loadPuzzle } from "./loadPuzzle";
 import puzzle001 from "./puzzle-001.json";
 
-// Baseline: the raw JSON is trusted as-is. Validation is added with the engine.
-export const PUZZLE_001 = puzzle001 as PuzzleDefinition;
+export { loadPuzzle, PuzzleValidationError } from "./loadPuzzle";
+
+/** Puzzle 001 "The Intersection", validated and deeply frozen at import time. */
+export const PUZZLE_001: PuzzleDefinition = loadPuzzle(puzzle001);
