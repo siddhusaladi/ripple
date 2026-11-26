@@ -1,16 +1,13 @@
-// Public entry point of the headless simulation.
+// Public entry point of the headless simulation. Safe to import from Node: no Phaser, no DOM.
+import { Simulation } from "./Simulation";
 import type { Intervention, PuzzleDefinition, SimulationResult } from "./types";
 
 export type * from "./types";
+export { InterventionError, Simulation } from "./Simulation";
+export { NavGraph } from "./NavGraph";
+export { KIND_TRAITS } from "./Actor";
 
-/**
- * Runs a puzzle from tick 0 to completion with at most one intervention.
- *
- * BASELINE (tag `start`): not implemented. The scenario tests in
- * tests/simulation/scenarios.test.ts describe the behavior to build.
- */
+/** Runs a puzzle from tick 0 to completion with at most one intervention. */
 export function runSimulation(puzzle: PuzzleDefinition, intervention: Intervention | null): SimulationResult {
-  void puzzle;
-  void intervention;
-  throw new Error("Simulation not implemented: movement, routing, signals, and collisions are missing");
+  return new Simulation(puzzle, intervention).run();
 }

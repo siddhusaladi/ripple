@@ -1,0 +1,252 @@
+$ git rev-parse HEAD
+9dcdf7d02aaf962afe2083495bdbc9459d864473
+$ node --version
+v22.17.1
+$ npm test
+
+> ripple@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.2 /private/tmp/claude-503/-Users-hpicemobile-Desktop-dev-Agentic-ripple/d759df62-8f39-4695-8226-1e4244c1fb3a/scratchpad/start-wt
+
+ ❯ tests/simulation/scenarios.test.ts (14 tests | 14 failed) 8ms
+   ❯ Scenario 0: no intervention (4)
+     × plans the default routes 3ms
+     × pedestrian and car both enter the crossing at tick 12 and collide 0ms
+     × cyclist passes the side junction at tick 8, unaffected 0ms
+     × fails at tick 12 0ms
+   ❯ Scenario 1: traffic light retimed (4)
+     × records the edit at tick 0 0ms
+     × car is held at the stop line during ticks 12, 13, 14 0ms
+     × pedestrian crosses at tick 12 and has left before the car enters at tick 15 0ms
+     × pedestrian survives and reaches the cafe at tick 16 0ms
+   ❯ Scenario 2: trash can pushed onto the sidewalk (3)
+     × blocks the normal sidewalk and forces a route 4 segments longer 1ms
+     × car still enters the crossing at tick 12; pedestrian reaches it at tick 16 0ms
+     × pedestrian survives 0ms
+   ❯ Scenario 3: delivery crate dragged into the bike path (3)
+     × reroutes only the cyclist, 3 segments longer 0ms
+     × cyclist reaches the side junction at tick 11 instead of 8 1ms
+     × pedestrian and car still collide at tick 12 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 0: no intervention > plans the default routes
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:24:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:27:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 0: no intervention > pedestrian and car both enter the crossing at tick 12 and collide
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:24:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:35:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 0: no intervention > cyclist passes the side junction at tick 8, unaffected
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:24:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:44:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 0: no intervention > fails at tick 12
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:24:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:48:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 1: traffic light retimed > records the edit at tick 0
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:55:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:58:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 1: traffic light retimed > car is held at the stop line during ticks 12, 13, 14
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:55:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:62:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 1: traffic light retimed > pedestrian crosses at tick 12 and has left before the car enters at tick 15
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:55:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:69:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 1: traffic light retimed > pedestrian survives and reaches the cafe at tick 16
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:55:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:76:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 2: trash can pushed onto the sidewalk > blocks the normal sidewalk and forces a route 4 segments longer
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:85:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:88:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 2: trash can pushed onto the sidewalk > car still enters the crossing at tick 12; pedestrian reaches it at tick 16
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:85:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:98:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 2: trash can pushed onto the sidewalk > pedestrian survives
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:85:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:104:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 3: delivery crate dragged into the bike path > reroutes only the cyclist, 3 segments longer
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:111:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:114:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 3: delivery crate dragged into the bike path > cyclist reaches the side junction at tick 11 instead of 8
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:111:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:122:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  tests/simulation/scenarios.test.ts > Scenario 3: delivery crate dragged into the bike path > pedestrian and car still collide at tick 12
+Error: Simulation not implemented: movement, routing, signals, and collisions are missing
+ ❯ runSimulation src/simulation/index.ts:15:9
+     13|   void puzzle;
+     14|   void intervention;
+     15|   throw new Error("Simulation not implemented: movement, routing, sign…
+       |         ^
+     16| }
+     17|
+ ❯ tests/simulation/scenarios.test.ts:111:24
+ ❯ tests/simulation/helpers.ts:33:37
+ ❯ tests/simulation/scenarios.test.ts:126:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  14 failed (14)
+   Start at  22:02:59
+   Duration  151ms (transform 61%, import 18%, tests 15%, worker 5%)
+
+$ echo $?
+1

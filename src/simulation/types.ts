@@ -132,7 +132,8 @@ export type SimEvent =
       readonly tick: number;
       readonly type: "route_changed";
       readonly actorId: string;
-      readonly baselineSegments: number;
+      /** Route length without the intervention; null if the destination was unreachable. */
+      readonly baselineSegments: number | null;
       readonly segments: number;
     }
   | { readonly tick: number; readonly type: "no_route"; readonly actorId: string }
