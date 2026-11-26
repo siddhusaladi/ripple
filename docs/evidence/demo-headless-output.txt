@@ -1,0 +1,92 @@
+$ git rev-parse HEAD
+320aa3d762ebd974e5349e3e30925f3253b63d87
+$ npm run demo:headless
+
+> ripple@0.1.0 demo:headless
+> tsx scripts/demo-headless.ts
+
+
+=== puzzle-001 "The Intersection" — no intervention ===
+  tick  0: Maya planned a 16-segment route
+  tick  0: the car planned a 21-segment route
+  tick  0: the cyclist planned a 10-segment route
+  tick  8: the cyclist entered the side junction
+  tick 10: the cyclist arrived
+  tick 12: Maya entered the crossing
+  tick 12: the car entered the crossing
+  tick 12: COLLISION at x14_9: the car + Maya
+  tick 12: Maya died
+  tick 12: simulation completed — FAILED (killed)
+  result: died (end tick 12)
+  explanation:
+    - Maya reached the crossing at t=12.
+    - The car reached the crossing at t=12.
+    - The car and Maya collided at t=12.
+    - Maya did not survive. Rewind and try a different change.
+
+=== puzzle-001 "The Intersection" — traffic_light/retime ===
+  tick  0: traffic_light modified (retime)
+  tick  0: Maya planned a 16-segment route
+  tick  0: the car planned a 21-segment route
+  tick  0: the cyclist planned a 10-segment route
+  tick  8: the cyclist entered the side junction
+  tick 10: the cyclist arrived
+  tick 12: the car waited at red traffic_light (r13_9)
+  tick 12: Maya entered the crossing
+  tick 13: the car waited at red traffic_light (r13_9)
+  tick 14: the car waited at red traffic_light (r13_9)
+  tick 15: the car entered the crossing
+  tick 16: Maya arrived
+  tick 24: the car arrived
+  tick 24: simulation completed — SURVIVED (arrived)
+  result: survived (end tick 24)
+  explanation:
+    - You changed the traffic light: Retime the signal.
+    - The car waited at a red light for 3 s (t=12–14).
+    - Maya reached the crossing at t=12, as before.
+    - The car reached the crossing at t=15 instead of t=12.
+    - Maya made it safely at t=16.
+
+=== puzzle-001 "The Intersection" — trash_can/move_to_sidewalk ===
+  tick  0: trash_can modified (move_to_sidewalk)
+  tick  0: Maya planned a 20-segment route
+  tick  0: Maya route recalculated: 16 -> 20 segments
+  tick  0: the car planned a 21-segment route
+  tick  0: the cyclist planned a 10-segment route
+  tick  8: the cyclist entered the side junction
+  tick 10: the cyclist arrived
+  tick 12: the car entered the crossing
+  tick 16: Maya entered the crossing
+  tick 20: Maya arrived
+  tick 21: the car arrived
+  tick 21: simulation completed — SURVIVED (arrived)
+  result: survived (end tick 21)
+  explanation:
+    - You changed the trash can: Push onto the sidewalk.
+    - Maya's usual route was blocked, so they took a different one (+4 segments).
+    - Maya reached the crossing at t=16 instead of t=12.
+    - The car reached the crossing at t=12, as before.
+    - Maya made it safely at t=20.
+
+=== puzzle-001 "The Intersection" — delivery_crate/move_to_bike_path ===
+  tick  0: delivery_crate modified (move_to_bike_path)
+  tick  0: Maya planned a 16-segment route
+  tick  0: the car planned a 21-segment route
+  tick  0: the cyclist planned a 13-segment route
+  tick  0: the cyclist route recalculated: 10 -> 13 segments
+  tick 11: the cyclist entered the side junction
+  tick 12: Maya entered the crossing
+  tick 12: the car entered the crossing
+  tick 12: COLLISION at x14_9: the car + Maya
+  tick 12: Maya died
+  tick 13: the cyclist arrived
+  tick 13: simulation completed — FAILED (killed)
+  result: died (end tick 13)
+  explanation:
+    - You changed the delivery crate: Drag into the bike path.
+    - The cyclist's usual route was blocked, so they took a different one (+3 segments).
+    - Maya reached the crossing at t=12, as before.
+    - The car reached the crossing at t=12, as before.
+    - The cyclist reached the side junction at t=11 instead of t=8.
+    - The car and Maya collided at t=12.
+    - Maya did not survive. Rewind and try a different change.
