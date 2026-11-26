@@ -29,3 +29,35 @@ check (disable signals → 4 failures, restore → 35/35).
 at Siddharth's request.
 
 **Remaining:** NEXT_TASKS T1–T6.
+
+## Session 2 — 2026-11-25 — Siddharth (Claude Code, Opus 5.5)
+
+**Starting point:** `a73aab6`, clean, in sync with origin (session 1 and the
+`start` tag had been pushed by Siddharth).
+
+**Review (phase 1):** grepped the engine for instance ids and tick literals;
+it references only kind/type names, never `trash_can` etc. or tick numbers.
+D2 accepted: `NavGraph` treats the diagonal edge like any other (no geometry
+special-casing), and BFS produces the +3.
+
+**Work:**
+- `0219c51` TimelineController: pure-TS playback of precomputed results, plus
+  tests including browser pose = headless snapshot at every tick → 49 tests.
+- `8f91747` Phaser GameScene, DOM controls, Kenney RPG Urban Pack 1.0 (CC0,
+  license checked in the archive), art-vs-graph test, browser smoke script,
+  and evidence screenshots → 52 tests.
+- Handoff-docs commit: `CLAUDE.md`, `COURSE_REQUIREMENTS.md`, updated state,
+  tasks, decisions (D4 mutation table, D5 evidence, D6, D7), B3, ownership,
+  README onboarding.
+
+**Tests:** `npm test` 52/52; `npm run build` OK; browser smoke test passed 3×
+on dev and 1× on the production build. Mutation checks: M2 (no obstacle
+blocking) → 9 failures; M3 (no collisions) → 6 failures; restored → 52/52.
+
+**Bugs:** B3 (panel lagging clicks, found by the smoke test). The smoke
+script also initially hid its own failure details; fixed.
+
+**Browser:** the Claude-in-Chrome extension was not connected, so
+verification used Playwright with the installed Chrome (headless).
+
+**Not pushed.** Remaining: NEXT_TASKS T0–T4.

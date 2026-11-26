@@ -13,12 +13,18 @@ if something matters, it must be written down here or in the other handoff files
    `handoff/NEXT_TASKS.md`, `handoff/DECISIONS.md`, `handoff/BUG_LOG.md`.
 3. `npm ci && npm test && npm run build`. Compare with what `CURRENT_STATE.md`
    claims. Report any mismatch before doing new work.
+   (`CLAUDE.md` at the repo root repeats this checklist; Claude Code loads it
+   automatically.)
 4. Pick the highest-priority unfinished task in `NEXT_TASKS.md`.
 
 ## During the session
 
 - Work in small milestones; run `npm test` (and `npm run build` for UI work)
   after each, and commit verified work with an accurate message.
+- For UI changes, also verify in a browser: play the four scenarios, or run
+  `uv run --with playwright python scripts/browser_smoke.py` with the dev
+  server running (needs Google Chrome). Never claim browser behavior you have
+  not observed.
 - Respect recorded decisions. To change one, write the new decision in
   `DECISIONS.md` and get the student's approval first.
 - Do not make unrelated rewrites of working code.

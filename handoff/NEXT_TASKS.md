@@ -1,61 +1,84 @@
 # Next Tasks (priority order)
 
-## T1 Review session 1 work (Siddharth) — before anything is pushed
+Deadline: **Tuesday, December 1, 2026, 3:00 PM.** The MVP is playable. What
+remains is mostly ownership, evidence, and the presentation.
 
-- Read `docs/puzzle-spec.md` and `handoff/PROJECT_SPEC.md` §Simulation rules,
-  then `src/simulation/Simulation.ts`. Check that the rules match your intent;
-  ask the agent about anything you can't explain.
-- Run `npm ci && npm test && npm run demo:headless`.
-- Push when satisfied: `git push origin main --follow-tags` (the `--follow-tags`
-  is needed so the `start` tag reaches GitHub).
+## T0 Siddharth: review session 2 and push
 
-## T2 TimelineController (pure TS, tested) — Milestone 4a
+- Play the game (`npm run dev`) and read `src/game/TimelineController.ts`,
+  `src/game/GameScene.ts`, `src/ui/controls.ts`, and `BUG_LOG.md` B3.
+- If satisfied: `git push origin main`.
+- **Acceptance:** `origin/main` contains the handoff-docs commit; Akshay can
+  `git pull`.
 
-- **Implement:** `src/game/TimelineController.ts`: holds the puzzle, the
-  selected intervention, and the precomputed `SimulationResult`. Provides
-  `select(intervention | null)`, `play()`, `rewind()`, `reset()`,
-  `update(dtMs)`, a float `playhead` (ticks), and
-  `actorPose(id) → { x, y, status, waiting }`, interpolated between
-  `snapshots[floor]` and `snapshots[floor+1]`, with status taken from
-  `snapshots[floor]`. No Phaser imports.
-- **Accept:** a test in `tests/game/timeline.test.ts` covers the playhead
-  clamping at `endTick`, interpolation halfway between two ticks, and that
-  `reset()` clears the selection and result. The playback speed must not
-  change the result.
-- **Depends on:** nothing. **Tests:** `npm test`.
+## T1 Akshay: onboard and review the game layer
 
-## T3 GameScene + DOM UI — Milestone 4b
+- Follow `CLAUDE.md` (a new Claude Code session loads it automatically).
+- Run `npm ci && npm test && npm run build && npm run demo:headless`, then
+  play every scenario in the browser and compare against the table in
+  README §Puzzle 001.
+- Read `docs/architecture.md`, `src/game/`, `src/ui/`. Write down anything you
+  can't explain and ask your agent or Siddharth.
+- **Acceptance:** Akshay can explain how `TimelineController` turns a
+  `SimulationResult` into what Phaser draws, and why the browser can't
+  disagree with the headless simulation.
 
-- **Implement:** `src/game/GameScene.ts` draws `puzzle.map` tiles (generated
-  shapes for now), objects at their current/edited tiles, actors from
-  `actorPose`, and the signal color from `snapshots[t].signals`.
-  `src/ui/controls.ts` (DOM): title/intro, three object buttons (one
-  selectable at a time), Play/Replay, Rewind, Reset, a timeline bar with tick
-  label and event markers, a result banner, and `explainRun` lines.
-  `src/main.ts` wires them together. Clicking an object in the scene selects
-  it too.
-- **Accept:** a player can watch the crash, rewind, choose each object,
-  replay, and see the correct outcome; the visual ticks match
-  `npm run demo:headless`; no console errors; `npm run build` passes.
-- **Depends on:** T2.
+## T2 Akshay owns: Puzzle 002 + deterministic daily selection (Milestone 6)
 
-## T4 Kenney RPG Urban Kit assets
+This gives Akshay a component he designs himself, and it is the project's
+stated long-term goal. Work **test-first**, as with Puzzle 001.
 
-- Download the pack and verify the CC0 license text inside it. Copy only the
-  tiles/sprites used into `public/assets/kenney-rpg-urban/` with the license
-  file. Record the exact files in `docs/external-sources.md`. Swap the
-  generated shapes for sprites in `GameScene` only.
-- **Accept:** game unchanged in behavior; tests unchanged.
+1. **Design (Akshay):** a second scenario on a new map, with three objects,
+   at least one edit that saves the protagonist, and at least one that does
+   not. Write `docs/puzzle-002-spec.md` with the graph, route lengths, signal
+   cycles, and hand-derived tick tables, following `docs/puzzle-spec.md`.
+2. **Failing tests first:** `tests/simulation/puzzle-002.test.ts` asserting
+   the hand-derived chains. Commit while they fail (the puzzle JSON doesn't
+   exist or is incomplete), and capture that output in `docs/evidence/`.
+3. **Data:** `src/puzzles/puzzle-002.json`. Use the existing kinds
+   (`traffic_light`, `obstacle`; actors `pedestrian`/`car`/`cyclist`) and
+   existing map characters (see `src/game/sprites.ts`). **Do not change engine
+   rules** (`PROJECT_SPEC.md`). If the design needs a new rule, record a
+   decision and get Siddharth's approval first.
+4. **Selection:** `src/puzzles/daily.ts` exporting
+   `selectDailyPuzzle(catalog, date: Date)`, which returns
+   `catalog[floor(date.getTime() / 86_400_000) mod catalog.length]` (UTC
+   days; rollover at 00:00 UTC). No `Date.now()` inside: the caller passes
+   the date. `tests/simulation/daily.test.ts`: same UTC day → same puzzle
+   (e.g. 00:00:00Z and 23:59:59Z); next day → the next puzzle; the rotation
+   repeats after `catalog.length` days.
+5. **UI:** `src/main.ts` picks the puzzle with `selectDailyPuzzle(CATALOG, new
+   Date())` and shows "Daily puzzle — YYYY-MM-DD (UTC)". Optional: a
+   `?puzzle=puzzle-001` URL override for the demo. Rename `PUZZLE_001`-specific
+   wording only where needed (e.g. `scripts/browser_smoke.py` assumes
+   Puzzle 001's map, so it should force `?puzzle=puzzle-001`).
+6. **Docs:** README and `docs/proposal-feedback.md` §5 updated from "planned"
+   to what actually works; `PROJECT_SPEC.md` scope updated with Siddharth's
+   approval.
+- **Acceptance:** all tests pass, including new puzzle-002 and daily tests;
+  the puzzle-002 tests failed before the data existed (evidence committed);
+  the `sprites.test.ts` checks also pass for puzzle 002 (generalize the test
+  to loop over the catalog).
+- **Files:** `src/puzzles/`, `tests/simulation/`, `src/main.ts`,
+  `tests/game/sprites.test.ts`, docs.
 
-## T5 Evidence for the slides
+## T3 Both: presentation evidence
 
-- Repeat the D4 check for the obstacle-blocking and collision rules; record
-  the results in `DECISIONS.md`.
-- Log the next real bug fully in `BUG_LOG.md` (needed for slide 5).
-- Students choose the two slide decisions (candidates ★ in `DECISIONS.md`).
-- Fill in EIDs and emails in `docs/proposal-feedback.md`.
+- Choose the two slide decisions (candidates ★ in `DECISIONS.md`: D4 and D5
+  have measured evidence). Each student should be able to defend them.
+- Fill in both EIDs and the contact email in `docs/proposal-feedback.md`.
+- Decide whether B3 is the slide-5 debugging story, or record a better real one.
+- Build the ~6-slide PDF from `COURSE_REQUIREMENTS.md` §Final presentation.
+  Every claim must cite committed evidence; record the commit SHA shown on
+  slide 1.
+- Update `OWNERSHIP.md` with who reviewed and who owns what.
 
-## T6 (Optional, only after T1–T5) Daily puzzle — Milestone 6
+## T4 Polish (only if time remains)
 
-- Second puzzle JSON plus its own hand derivation and scenario tests;
-  `selectDailyPuzzle(catalog, date)` by UTC day; same-day/next-day tests.
+- Small on-map labels "HOME" / "CAFE" (Phaser text at high resolution, or DOM
+  overlay).
+- Check the layout at laptop widths (1280, 1024) and below 900 px (the panel
+  stacks under the canvas).
+- After each UI change, run `npm test`, `npm run build`, and
+  `uv run --with playwright python scripts/browser_smoke.py` with the dev
+  server running.

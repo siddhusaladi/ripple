@@ -8,9 +8,9 @@ reaction saves her.
 CS 378 final project: Siddharth Saladi and Akshay Kondala.
 Repository: https://github.com/siddhusaladi/ripple
 
-> **Status:** the headless simulation of Puzzle 001 is complete and tested.
-> The playable browser game is **not built yet**: `npm run dev` shows a
-> placeholder screen. See `handoff/CURRENT_STATE.md`.
+> **Status:** playable MVP: one puzzle, three editable objects, full
+> rewind/replay loop, all outcomes computed by a tested headless simulation.
+> Daily puzzles are planned, not built. Details: `handoff/CURRENT_STATE.md`.
 
 ## Requirements
 
@@ -26,7 +26,33 @@ npm run build             # typecheck + production build into dist/
 npm test                  # full headless test suite (Vitest, Node environment)
 npm run demo:headless     # run all four scenarios in Node and print the event logs
 npm run demo:headless -- trash_can   # one scenario: none | traffic_light | trash_can | delivery_crate
+npm run preview           # serve the production build from dist/ (after npm run build)
 ```
+
+No configuration, environment variables, or network access needed after
+`npm ci`.
+
+Optional browser check (needs Google Chrome and [uv](https://docs.astral.sh/uv/);
+run while `npm run dev` is running):
+
+```bash
+uv run --with playwright python scripts/browser_smoke.py http://localhost:5173/
+```
+
+It plays all four scenarios in headless Chrome and fails if any outcome
+differs from the headless simulation or the console shows errors.
+
+## How to play
+
+1. Open the dev server URL and press **Play**: Maya leaves home and is hit at
+   the crossing.
+2. Pick one object, either with its button in the panel or by clicking it in
+   the scene (yellow outline): the traffic light, the trash can, or the
+   delivery crate.
+3. Press **Replay** and watch the chain reaction. The result panel explains
+   what changed, using the simulation's own events.
+4. **Rewind** keeps your change and returns to the start; **Reset** removes
+   it. Space plays and pauses; R rewinds.
 
 ## Puzzle 001 at a glance
 
@@ -42,9 +68,13 @@ Derivation: `docs/puzzle-spec.md`. Rules: `handoff/PROJECT_SPEC.md`.
 ## Reproducing results
 
 - **Original failure:** `npm run demo:headless -- none`. Look for
-  `tick 12: COLLISION at x14_9` and `FAILED (killed)`.
+  `tick 12: COLLISION at x14_9` and `FAILED (killed)`. In the browser, press
+  Play without choosing anything.
 - **Successful intervention:** `npm run demo:headless -- trash_can` (or
-  `traffic_light`) ends with `SURVIVED`.
+  `traffic_light`) ends with `SURVIVED`. In the browser, choose the trash can
+  and press Replay.
+- **Failed intervention:** `npm run demo:headless -- delivery_crate`. The
+  cyclist reroutes, but Maya still dies at tick 12.
 - **Starting point vs. now:** the scenario tests fail on tag `start` and pass
   now. See `docs/start-comparison.md` for the exact commands and the captured
   output in `docs/evidence/`.
@@ -54,9 +84,11 @@ Derivation: `docs/puzzle-spec.md`. Rules: `handoff/PROJECT_SPEC.md`.
 ```text
 src/simulation/   headless engine (no Phaser/DOM): NavGraph, objects, Actor, World, Simulation, report
 src/puzzles/      puzzle JSON + loadPuzzle validator
-src/game/, src/ui/  (Milestone 4) playback controller, Phaser scene, DOM controls
-src/main.ts       browser entry (placeholder boot scene for now)
-scripts/          demo-headless.ts
+src/game/         TimelineController (pure TS playback), GameScene (Phaser), sprite map
+src/ui/           DOM control panel + styles
+src/main.ts       browser entry
+public/assets/    Kenney RPG Urban Pack tile sheet + license (CC0)
+scripts/          demo-headless.ts, browser_smoke.py (optional)
 tests/            Vitest suites + fixtures
 docs/             architecture, puzzle spec, sources, proposal feedback, evidence
 handoff/          spec, current state, next tasks, decisions, bugs, ownership, session log, agent rules
@@ -74,8 +106,30 @@ handoff/          spec, current state, next tasks, decisions, bugs, ownership, s
   (this is what makes the accident happen).
 - Only one puzzle, with one modification per object. Daily puzzles are a
   documented plan, not a feature.
+- The tests that compare runs (determinism, browser vs. headless) show
+  consistency, not correctness. They passed even with core rules
+  deliberately broken; correctness rests on the hand-derived scenario tests
+  (`handoff/DECISIONS.md` D4).
+- Layout has been checked at desktop size (1400 × 860) only.
+
+## Resuming development (new developer or new Claude Code session)
+
+The repository is the only shared memory; no earlier conversation is needed.
+
+1. `git pull --ff-only`, then `npm ci`.
+2. Start Claude Code in the repo root. It loads `CLAUDE.md`, which lists the
+   handoff files to read in order and points to `handoff/AGENT_RULES.md`
+   (rules, rejection criteria, session-end checklist).
+3. Read `handoff/CURRENT_STATE.md` (what works now) and
+   `handoff/NEXT_TASKS.md` (what to do next, with acceptance criteria).
+   `handoff/COURSE_REQUIREMENTS.md` maps each grading requirement to its
+   evidence.
+4. Run `npm test && npm run build` and confirm they match `CURRENT_STATE.md`
+   before changing anything.
+5. At the end of the session, update `CURRENT_STATE.md` and `NEXT_TASKS.md`,
+   append to `SESSION_LOG.md`, commit, and push only when the student asks.
 
 ## Credits
 
-Libraries and asset status: `docs/external-sources.md`. Built with
+Art: Kenney RPG Urban Pack (CC0). Libraries and versions: `docs/external-sources.md`. Built with
 substantial help from Claude Code. See `handoff/OWNERSHIP.md`.

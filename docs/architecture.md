@@ -12,8 +12,10 @@ src/puzzles/puzzle-001.json ──loadPuzzle()──▶ PuzzleDefinition (valida
                                                    ▼
                      SimulationResult { events[], snapshots[0..endTick], success }
                           │                                │
-              scripts/demo-headless.ts           (planned) TimelineController → GameScene (Phaser)
-              tests/simulation/*.test.ts                   DOM controls / explanation (src/ui/)
+              scripts/demo-headless.ts           TimelineController (src/game/, pure TS: playhead + poses)
+              tests/simulation/*.test.ts            │                         │
+                                                   GameScene (Phaser)        Controls (DOM, src/ui/)
+                                                   draws map/actors/objects  buttons, timeline, explainRun text
 ```
 
 ## Responsibilities
@@ -28,6 +30,11 @@ src/puzzles/puzzle-001.json ──loadPuzzle()──▶ PuzzleDefinition (valida
 | `World` | `src/simulation/World.ts` | Graph + objects for one run: blocked nodes, signal lookup, landmarks |
 | `Simulation` | `src/simulation/Simulation.ts` | Clock and all mutable state; applies the tick order in PROJECT_SPEC |
 | `report` | `src/simulation/report.ts` | Event formatting; explanation by diffing a run against the unmodified run |
+| `TimelineController` | `src/game/TimelineController.ts` | Selection (one edit), play/pause/rewind/reset, playhead, interpolated actor poses. Pure TS, tested |
+| `GameScene` | `src/game/GameScene.ts` | Phaser: draws map, objects, signal lamp, and actors from the controller; forwards object clicks |
+| sprite map | `src/game/sprites.ts` | Map characters/kinds → Kenney sheet frames (rendering only) |
+| `Controls` | `src/ui/controls.ts` | DOM panel: object choices, buttons, timeline markers, result + explanation, attempts, event log |
+| entry | `src/main.ts` | Wires puzzle → controller → scene + controls |
 
 ## Rules that keep it testable
 
@@ -35,8 +42,11 @@ src/puzzles/puzzle-001.json ──loadPuzzle()──▶ PuzzleDefinition (valida
   clock, or randomness (`tests/simulation/headless.test.ts` scans for this).
 - A `Simulation` is single-use and built from frozen data, so "reset" means
   constructing a new one. Nothing carries over between replays.
-- The renderer will consume `snapshots`, a complete per-tick state, and
-  interpolate between them for display only. It never computes outcomes.
+- The renderer consumes `snapshots`, a complete per-tick state, through
+  `TimelineController` and interpolates between them for display only. It
+  never computes outcomes. Frame time moves the playhead and nothing else.
+- When the player changes the selection, the controller calls `runSimulation`
+  and gets the whole result before playback starts.
 - Objects only change world facts (a signal schedule, an occupied tile).
   Outcomes come from routing, movement, and collisions. No code branches on
   which object was edited.

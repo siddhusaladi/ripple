@@ -28,12 +28,12 @@ evidence. Full list: `handoff/AGENT_RULES.md` §Rejection criteria.
 
 ## 4. Pixel-art assets
 
-Intended pack: **Kenney RPG Urban Kit** (https://kenney-assets.itch.io/rpg-urban-kit),
-license **CC0 1.0**. *Status: not yet included in the repository.* The
-license will be verified at download time and recorded in
-`docs/external-sources.md`. If the pack cannot be obtained, the game uses
-simple generated shapes. The rendering layer is separate from the simulation,
-so swapping art does not affect rules or tests.
+**Kenney "RPG Urban Pack" 1.0** (itch.io listing name: "RPG Urban Kit"),
+https://kenney.nl/assets/rpg-urban-pack, license **CC0 1.0**. The license was
+verified in the `License.txt` inside the downloaded archive. The tile sheet
+and license file are committed in `public/assets/kenney-rpg-urban/`, and the
+frames used are listed in `src/game/sprites.ts`. Details:
+`docs/external-sources.md`.
 
 ## 5. Meaning of "daily puzzles"
 

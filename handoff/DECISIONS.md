@@ -72,10 +72,22 @@ they own and can defend. Candidates are marked ★.
   explanation test); 31 passed. With the rule restored: 35/35. An
   outcome-only Scenario 1 test would also have failed here, but it could not
   say whether the car waited at 12–14 or entered at 15.
-- **Follow-up:** repeat the same check for the obstacle-blocking and
-  collision rules and record the results here (NEXT_TASKS).
+- **Follow-up (session 2), same method on the other two core rules:**
 
-## D5 ★ Simulation separated from Phaser; renderer plays back precomputed snapshots — simulation side made, renderer planned
+  | Mutation | Tests failing (of 52) | Which |
+  |---|---|---|
+  | M1: cars ignore signals (session 1, 35-test suite) | 4 of 35 | Scenario 1 ×3, signal explanation |
+  | M2: obstacles never block (`World.blockedNodes` → empty) | 9 | Scenario 2 ×3, Scenario 3 ×3, both affected explanations, headless demo |
+  | M3: collisions ignored (`resolveCollisions` no-op) | 6 | Scenario 0 ×2, Scenario 3 collision, crate explanation, Node-run check, timeline end tick |
+
+  Each rule is guarded by the tests of the scenarios that depend on it.
+- **What this does not establish:** the determinism tests and the
+  browser-vs-headless tests (`tests/game/timeline.test.ts`) passed under
+  **every** mutation. They show consistency (same input → same output; the
+  UI shows what the engine computed), not correctness. Correctness rests on
+  the hand-derived scenario expectations.
+
+## D5 ★ Simulation separated from Phaser; renderer plays back precomputed snapshots — made
 
 - **Problem:** Phaser's update loop is frame-driven, and outcomes must not
   depend on it.
@@ -88,6 +100,44 @@ they own and can defend. Candidates are marked ★.
   before playback, so the UI can show event markers on the timeline. Tests
   and the browser use the same code path, and playback speed cannot change
   outcomes.
-- **Evidence so far:** `tests/simulation/headless.test.ts` (no Phaser/DOM in
-  simulation code; the demo runs in a separate Node process). Renderer
-  evidence pending (Milestone 4).
+- **Agent asked to (session 2):** build `TimelineController` (pure TS) and a
+  `GameScene` that only reads it.
+- **Code:** `src/game/TimelineController.ts`, `src/game/GameScene.ts`
+  (`0219c51`, `8f91747`).
+- **Evidence:** `tests/simulation/headless.test.ts` checks that simulation
+  code has no Phaser/DOM/clock references and that the demo runs in a
+  separate Node process. `tests/game/timeline.test.ts` checks that, for all
+  four scenarios, the pose the scene draws at every tick equals the headless
+  snapshot, and that frame steps of 5/16/33/250 ms and two playback speeds
+  give byte-identical results. `scripts/browser_smoke.py` checks that the real
+  browser shows the same four outcomes and end ticks as
+  `npm run demo:headless`.
+- **Result:** all pass. Playback speed is a UI toggle with no effect on
+  outcomes.
+- **Follow-up:** see the limitation recorded under D4. These tests prove the
+  UI matches the engine, not that the engine is right.
+
+## D6 Controls and text in the DOM, not drawn in Phaser — made
+
+- **Problem:** the player needs buttons, a timeline, and several lines of
+  explanation next to a 384 × 208 px pixel-art canvas.
+- **Selected:** an HTML panel (`src/ui/controls.ts`) beside the canvas; Phaser
+  draws only the world.
+- **Alternative:** Phaser text and button objects inside the canvas.
+- **Why:** text drawn into a small canvas and scaled up is blurry or
+  oversized. DOM buttons get keyboard focus, hover, and disabled states for
+  free, and Playwright can target them directly. Clicking objects in the
+  canvas still works for players who prefer it.
+- **Code:** `src/ui/controls.ts`, `src/ui/style.css`, `index.html` (`8f91747`).
+
+## D7 Asset adaptation: rotated taxi, drawn signal lamp — made
+
+- **Problem:** the Kenney pack's vehicles are front/back views only, and its
+  traffic-light sprites have no separate red/green frames.
+- **Selected:** rotate the 1 × 2 taxi sprite −90° so it reads as a top-down
+  car heading east; draw the signal state as a colored circle on the pole,
+  driven by `snapshots[t].signals`.
+- **Alternative:** hand-draw new sprites, or use a different pack.
+- **Why:** keeps one consistent, licensed art source. The light's color comes
+  from simulation state, so it can never disagree with the car's behavior.
+- **Code:** `src/game/sprites.ts`, `src/game/GameScene.ts`.
