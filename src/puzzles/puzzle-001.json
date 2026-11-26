@@ -1,0 +1,209 @@
+{
+  "id": "puzzle-001",
+  "title": "The Intersection",
+  "intro": "Maya walks from her front door to the cafe every morning. Today she never makes it. Change one thing in the neighborhood and replay the morning.",
+  "maxTicks": 40,
+  "map": [
+    "############.tb..t...t..",
+    "############..b.....t...",
+    "############..bbbbbbbbb.",
+    "############....b...b...",
+    "HHHHHHH.....t....bbbb...",
+    "HHHHHHH.pppp............",
+    "HHHHdHH.p..p......t.....",
+    "ssssssssssssssssssssssss",
+    "==============z=========",
+    "==============z=========",
+    "ssssssssssssssssssssssss",
+    "################CdC#####",
+    "################CCC#####"
+  ],
+  "nodes": [
+    { "id": "s4_7", "x": 4, "y": 7 },
+    { "id": "s5_7", "x": 5, "y": 7 },
+    { "id": "s6_7", "x": 6, "y": 7 },
+    { "id": "s7_7", "x": 7, "y": 7 },
+    { "id": "s8_7", "x": 8, "y": 7 },
+    { "id": "s9_7", "x": 9, "y": 7 },
+    { "id": "s10_7", "x": 10, "y": 7 },
+    { "id": "s11_7", "x": 11, "y": 7 },
+    { "id": "s12_7", "x": 12, "y": 7 },
+    { "id": "s13_7", "x": 13, "y": 7 },
+    { "id": "s14_7", "x": 14, "y": 7 },
+    { "id": "s8_6", "x": 8, "y": 6 },
+    { "id": "s8_5", "x": 8, "y": 5 },
+    { "id": "s9_5", "x": 9, "y": 5 },
+    { "id": "s10_5", "x": 10, "y": 5 },
+    { "id": "s11_5", "x": 11, "y": 5 },
+    { "id": "s11_6", "x": 11, "y": 6 },
+    { "id": "x14_8", "x": 14, "y": 8 },
+    { "id": "x14_9", "x": 14, "y": 9 },
+    { "id": "s14_10", "x": 14, "y": 10 },
+    { "id": "s15_10", "x": 15, "y": 10 },
+    { "id": "s16_10", "x": 16, "y": 10 },
+    { "id": "s17_10", "x": 17, "y": 10 },
+    { "id": "r2_9", "x": 2, "y": 9 },
+    { "id": "r3_9", "x": 3, "y": 9 },
+    { "id": "r4_9", "x": 4, "y": 9 },
+    { "id": "r5_9", "x": 5, "y": 9 },
+    { "id": "r6_9", "x": 6, "y": 9 },
+    { "id": "r7_9", "x": 7, "y": 9 },
+    { "id": "r8_9", "x": 8, "y": 9 },
+    { "id": "r9_9", "x": 9, "y": 9 },
+    { "id": "r10_9", "x": 10, "y": 9 },
+    { "id": "r11_9", "x": 11, "y": 9 },
+    { "id": "r12_9", "x": 12, "y": 9 },
+    { "id": "r13_9", "x": 13, "y": 9 },
+    { "id": "r15_9", "x": 15, "y": 9 },
+    { "id": "r16_9", "x": 16, "y": 9 },
+    { "id": "r17_9", "x": 17, "y": 9 },
+    { "id": "r18_9", "x": 18, "y": 9 },
+    { "id": "r19_9", "x": 19, "y": 9 },
+    { "id": "r20_9", "x": 20, "y": 9 },
+    { "id": "r21_9", "x": 21, "y": 9 },
+    { "id": "r22_9", "x": 22, "y": 9 },
+    { "id": "r23_9", "x": 23, "y": 9 },
+    { "id": "b15_2", "x": 15, "y": 2 },
+    { "id": "b16_2", "x": 16, "y": 2 },
+    { "id": "b17_2", "x": 17, "y": 2 },
+    { "id": "b18_2", "x": 18, "y": 2 },
+    { "id": "b19_2", "x": 19, "y": 2 },
+    { "id": "b20_2", "x": 20, "y": 2 },
+    { "id": "b21_2", "x": 21, "y": 2 },
+    { "id": "b22_2", "x": 22, "y": 2 },
+    { "id": "j14_2", "x": 14, "y": 2 },
+    { "id": "b14_1", "x": 14, "y": 1 },
+    { "id": "b14_0", "x": 14, "y": 0 },
+    { "id": "b20_3", "x": 20, "y": 3 },
+    { "id": "b20_4", "x": 20, "y": 4 },
+    { "id": "b19_4", "x": 19, "y": 4 },
+    { "id": "b18_4", "x": 18, "y": 4 },
+    { "id": "b17_4", "x": 17, "y": 4 },
+    { "id": "b16_3", "x": 16, "y": 3 }
+  ],
+  "edges": [
+    {
+      "chain": ["s4_7", "s5_7", "s6_7", "s7_7", "s8_7", "s9_7", "s10_7", "s11_7", "s12_7", "s13_7", "s14_7", "x14_8", "x14_9", "s14_10", "s15_10", "s16_10", "s17_10"],
+      "modes": ["foot"]
+    },
+    {
+      "chain": ["s8_7", "s8_6", "s8_5", "s9_5", "s10_5", "s11_5", "s11_6", "s11_7"],
+      "modes": ["foot"]
+    },
+    {
+      "chain": ["r2_9", "r3_9", "r4_9", "r5_9", "r6_9", "r7_9", "r8_9", "r9_9", "r10_9", "r11_9", "r12_9", "r13_9"],
+      "modes": ["car"],
+      "oneWay": true
+    },
+    {
+      "chain": ["r13_9", "x14_9"],
+      "modes": ["car"],
+      "oneWay": true,
+      "signal": "traffic_light"
+    },
+    {
+      "chain": ["x14_9", "r15_9", "r16_9", "r17_9", "r18_9", "r19_9", "r20_9", "r21_9", "r22_9", "r23_9"],
+      "modes": ["car"],
+      "oneWay": true
+    },
+    {
+      "chain": ["b22_2", "b21_2", "b20_2", "b19_2", "b18_2", "b17_2", "b16_2", "b15_2", "j14_2", "b14_1", "b14_0"],
+      "modes": ["bike"]
+    },
+    {
+      "chain": ["b20_2", "b20_3", "b20_4", "b19_4", "b18_4", "b17_4", "b16_3", "b16_2"],
+      "modes": ["bike"]
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "crossing",
+      "node": "x14_9",
+      "label": "the crossing"
+    },
+    {
+      "id": "side_junction",
+      "node": "j14_2",
+      "label": "the side junction"
+    }
+  ],
+  "actors": [
+    {
+      "id": "pedestrian",
+      "kind": "pedestrian",
+      "label": "Maya",
+      "start": "s4_7",
+      "destination": "s17_10"
+    },
+    {
+      "id": "car",
+      "kind": "car",
+      "label": "the car",
+      "start": "r2_9",
+      "destination": "r23_9"
+    },
+    {
+      "id": "cyclist",
+      "kind": "cyclist",
+      "label": "the cyclist",
+      "start": "b22_2",
+      "destination": "b14_0"
+    }
+  ],
+  "protagonist": "pedestrian",
+  "objects": [
+    {
+      "id": "traffic_light",
+      "kind": "traffic_light",
+      "label": "Traffic light",
+      "tile": { "x": 13, "y": 10 },
+      "cycle": {
+        "period": 8,
+        "greenTicks": 5,
+        "offset": 0
+      },
+      "modifications": [
+        {
+          "id": "retime",
+          "label": "Retime the signal",
+          "description": "Shift the light's cycle so it turns red one second earlier.",
+          "cycle": {
+            "period": 8,
+            "greenTicks": 5,
+            "offset": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "trash_can",
+      "kind": "obstacle",
+      "appearance": "trash_can",
+      "label": "Trash can",
+      "tile": { "x": 10, "y": 6 },
+      "modifications": [
+        {
+          "id": "move_to_sidewalk",
+          "label": "Push onto the sidewalk",
+          "description": "Roll the trash can onto the sidewalk in front of the plaza.",
+          "tile": { "x": 10, "y": 7 }
+        }
+      ]
+    },
+    {
+      "id": "delivery_crate",
+      "kind": "obstacle",
+      "appearance": "crate",
+      "label": "Delivery crate",
+      "tile": { "x": 18, "y": 3 },
+      "modifications": [
+        {
+          "id": "move_to_bike_path",
+          "label": "Drag into the bike path",
+          "description": "Drag the delivery crate onto the park bike path.",
+          "tile": { "x": 18, "y": 2 }
+        }
+      ]
+    }
+  ]
+}
