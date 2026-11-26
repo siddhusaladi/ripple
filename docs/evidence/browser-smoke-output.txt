@@ -1,0 +1,32 @@
+$ git rev-parse HEAD  (working tree: frontend milestone, pre-commit)
+0219c51e53f8db99c1d588956d5227866d496a4e
+$ npm run build && npx vite preview --port 4173
+$ uv run --with playwright python scripts/browser_smoke.py http://localhost:4173/ docs/evidence/screenshots
+[ok] original: Maya didn't make it. t = 12 s (end)
+         - Maya reached the crossing at t=12.
+         - The car reached the crossing at t=12.
+         - The car and Maya collided at t=12.
+         - Maya did not survive. Rewind and try a different change.
+[ok] trash can: Maya made it! t = 21 s (end)
+         - You changed the trash can: Push onto the sidewalk.
+         - Maya's usual route was blocked, so they took a different one (+4 segments).
+         - Maya reached the crossing at t=16 instead of t=12.
+         - The car reached the crossing at t=12, as before.
+         - Maya made it safely at t=20.
+[ok] traffic light: Maya made it! t = 24 s (end)
+         - You changed the traffic light: Retime the signal.
+         - The car waited at a red light for 3 s (t=12–14).
+         - Maya reached the crossing at t=12, as before.
+         - The car reached the crossing at t=15 instead of t=12.
+         - Maya made it safely at t=16.
+[ok] delivery crate: Maya didn't make it. t = 13 s (end)
+         - You changed the delivery crate: Drag into the bike path.
+         - The cyclist's usual route was blocked, so they took a different one (+3 segments).
+         - Maya reached the crossing at t=12, as before.
+         - The car reached the crossing at t=12, as before.
+         - The cyclist reached the side junction at t=11 instead of t=8.
+         - The car and Maya collided at t=12.
+         - Maya did not survive. Rewind and try a different change.
+attempts: ✘ No change | ✔ Trash can: Push onto the sidewalk | ✔ Traffic light: Retime the signal | ✘ Delivery crate: Drag into the bike path
+PASSED: browser outcomes match the headless simulation; no console errors
+exit code: 0
