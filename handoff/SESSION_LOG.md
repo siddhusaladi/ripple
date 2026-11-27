@@ -61,3 +61,20 @@ script also initially hid its own failure details; fixed.
 verification used Playwright with the installed Chrome (headless).
 
 **Not pushed.** Remaining: NEXT_TASKS T0–T4.
+
+## Session 3 (2026-11-26, Siddharth) — re-verification after usage limit
+
+**Starting point:** `a736354`, clean, in sync with `origin/main`. Session 2 had
+already been pushed, though `CURRENT_STATE.md` said it hadn't.
+
+**Checks:** `npm ci && npm test` → 52/52 in 8 test files; `npm run build` OK;
+`scripts/browser_smoke.py` on the dev server → PASSED (all four outcomes match
+headless; no console errors). Screenshots went to a temp dir; committed
+evidence was left unchanged.
+
+**Doc fixes:** `CURRENT_STATE.md` (push status, 8 test files, not 9), T0 in
+`NEXT_TASKS.md` (push already done). Added `handoff/MANUAL_PLAYTEST.md` for
+the student playtest.
+
+**No code changes.** Next: T0 manual playtest, then decide on the
+ownership split before starting T2.

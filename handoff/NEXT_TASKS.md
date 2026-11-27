@@ -3,13 +3,13 @@
 Deadline: **Tuesday, December 1, 2026, 3:00 PM.** The MVP is playable. What
 remains is mostly ownership, evidence, and the presentation.
 
-## T0 Siddharth: review session 2 and push
+## T0 Siddharth: review session 2 (push already done)
 
-- Play the game (`npm run dev`) and read `src/game/TimelineController.ts`,
+- Play every scenario by hand using `handoff/MANUAL_PLAYTEST.md` and record
+  the results there. Then read `src/game/TimelineController.ts`,
   `src/game/GameScene.ts`, `src/ui/controls.ts`, and `BUG_LOG.md` B3.
-- If satisfied: `git push origin main`.
-- **Acceptance:** `origin/main` contains the handoff-docs commit; Akshay can
-  `git pull`.
+- **Acceptance:** the playtest checklist is filled in by a student, and
+  `OWNERSHIP.md` records Siddharth's review honestly.
 
 ## T1 Akshay: onboard and review the game layer
 

@@ -1,8 +1,8 @@
 # Current State
 
-_Updated at the end of session 2 (2026-11-25, Siddharth). Verify with
-`git log --oneline -12`. Last code commit: `8f91747`; the handoff-docs commit
-follows it._
+_Updated in session 3 (2026-11-26, Siddharth): docs re-verified against the
+repo. Last code commit: `8f91747`. Session 2 (through `a736354`) is pushed to
+`origin/main`._
 
 ## Works (verified this session)
 
@@ -15,7 +15,7 @@ follows it._
 - Art: Kenney RPG Urban Pack (CC0), committed under `public/assets/`.
 - Headless simulation of Puzzle 001, with all four scenarios matching
   `docs/puzzle-spec.md`. `npm run demo:headless` prints the real event logs.
-- `npm test`: **52 passed / 52** in 9 files: scenarios, determinism, reset,
+- `npm test`: **52 passed / 52** in 8 test files (re-run session 3): scenarios, determinism, reset,
   validation, headless, report, timeline (incl. browser-pose = headless
   snapshot at every tick), sprites (art agrees with the graph).
 - `npm run build`: passes. The production build also passes the browser smoke
@@ -24,7 +24,9 @@ follows it._
   four scenarios in headless Chrome. Outcomes and end ticks match the headless
   demo, with no console errors. It passed 3× on the dev server and 1× on the
   production build (`docs/evidence/browser-smoke-output.txt`, screenshots in
-  `docs/evidence/screenshots/`).
+  `docs/evidence/screenshots/`). Re-run on the dev server in session 3: passed.
+- **Human playtest:** only the traffic-light scenario has been played by a
+  student. Checklist for the rest: `handoff/MANUAL_PLAYTEST.md`.
 - Baseline tag `start` (`9dcdf7d`) is on GitHub; the scenario tests fail
   there (14/14).
 
@@ -50,8 +52,6 @@ Nothing known.
 - The debugging story (B3) is real but modest; no simulation bug has occurred.
 - Consistency tests ≠ correctness tests (DECISIONS D4). Correctness depends on
   the hand-derived expectations in `docs/puzzle-spec.md`.
-- Session 2 commits are **not pushed**. Akshay cannot see them until
-  Siddharth pushes.
 
 ## Known limitations
 
